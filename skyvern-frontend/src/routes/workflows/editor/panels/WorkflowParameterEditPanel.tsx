@@ -92,7 +92,7 @@ function WorkflowParameterEditPanel({
         : "skyvern",
   );
   const [urlParameterKey, setUrlParameterKey] = useState(
-    isBitwardenCredential ? initialValues.urlParameterKey ?? "" : "",
+    isBitwardenCredential ? (initialValues.urlParameterKey ?? "") : "",
   );
   const [description, setDescription] = useState(
     initialValues.description ?? "",
@@ -101,7 +101,7 @@ function WorkflowParameterEditPanel({
     isBitwardenCredential ||
       initialValues.parameterType === "secret" ||
       initialValues.parameterType === "creditCardData"
-      ? initialValues.collectionId ?? ""
+      ? (initialValues.collectionId ?? "")
       : "",
   );
   const [parameterType, setParameterType] =
@@ -161,7 +161,7 @@ function WorkflowParameterEditPanel({
   );
 
   const [bitwardenLoginCredentialItemId, setBitwardenLoginCredentialItemId] =
-    useState(isBitwardenCredential ? initialValues.itemId ?? "" : "");
+    useState(isBitwardenCredential ? (initialValues.itemId ?? "") : "");
 
   return (
     <ScrollArea>

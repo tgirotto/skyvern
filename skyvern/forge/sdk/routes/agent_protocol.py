@@ -794,6 +794,47 @@ async def retry_run_webhook(
     analytics.capture("skyvern-oss-agent-run-retry-webhook")
     await run_service.retry_run_webhook(run_id, organization_id=current_org.organization_id, api_key=x_api_key)
 
+@base_router.post(
+    "/run/tasks",
+    tags=["Agent"],
+    openapi_extra={
+        "x-fern-sdk-group-name": "agent",
+        "x-fern-sdk-method-name": "run_task",
+        "x-fern-examples": [
+            {
+                "code-samples": [
+                    {
+                        "sdk": "python",
+                        "code": RUN_TASK_CODE_SAMPLE,
+                    }
+                ]
+            }
+        ],
+    },
+    description="Run a task",
+    summary="Run a task",
+    responses={
+        200: {"description": "Successfully run task"},
+        400: {"description": "Invalid agent engine"},
+    },
+)
+
+################# Manual login #################
+
+@legacy_base_router.post(
+    "/manual-login",
+    tags=["Session"],
+    summary="Start manual login session",
+    description="Launches a browser so the user can manually log in. Session will be saved for reuse.",
+)
+async def manual_login_test() -> Response:
+    print("🔐 Manual login endpoint hit!")
+    # Later, this is where you’ll launch Playwright
+    return Response(
+        content="Manual login started (placeholder).",
+        status_code=200,
+        headers={"X-Skyvern-API-Version": __version__},
+    )
 
 ################# Legacy Endpoints #################
 @legacy_base_router.post(

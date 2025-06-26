@@ -87,7 +87,7 @@ function WorkflowRunOutput() {
                     value={
                       activeBlock.status === "canceled"
                         ? "This block was cancelled"
-                        : activeBlock.failure_reason ?? ""
+                        : (activeBlock.failure_reason ?? "")
                     }
                     readOnly
                   />

@@ -16,11 +16,15 @@ import {
 } from "@/components/ui/card";
 import { envCredential } from "@/util/env";
 import { HiddenCopyableInput } from "@/components/ui/hidden-copyable-input";
+import { Button } from "@/components/ui/button";
+import { useManualLogin } from "../workflows/hooks/useManualLoginQuery";
 
 function Settings() {
   const { environment, organization, setEnvironment, setOrganization } =
     useSettingsStore();
   const apiKey = envCredential;
+
+  const { refetch } = useManualLogin();
 
   return (
     <div className="flex flex-col gap-8">
@@ -65,6 +69,17 @@ function Settings() {
         </CardHeader>
         <CardContent className="p-8">
           <HiddenCopyableInput value={apiKey ?? "API key not found"} />
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="border-b-2">
+          <CardTitle className="text-lg">Manual login</CardTitle>
+          <CardDescription>
+            Log in manually and store sessions to reuse in your workflows
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="p-8">
+          <Button onClick={() => refetch()}>🔓 Login to GitHub</Button>
         </CardContent>
       </Card>
     </div>
